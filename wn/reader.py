@@ -21,7 +21,7 @@ def parse_wordnet_line(wordnet_line, parse_verb_frame=False, lexname_type=None):
     columns_str, gloss = wordnet_line.strip().split('|')
     # Extract the definition and examples from the gloss.
     definition = re.sub(r"[\"].*?[\"]", "", gloss).strip(';, ')
-    examples = re.findall(r'"([^"]*)"', gloss)
+    examples = re.findall(r'"([^"]*)"\s?(-*)\s?([^"]*)(?:;|  )', gloss)
 
     # The first 4 columns.
     offset, lexname_index, pos, n_lemmas, *the_rest = columns_str.split()
